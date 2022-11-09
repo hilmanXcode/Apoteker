@@ -9,6 +9,7 @@ if(!$id){
 }
 
 
+
 $query = mysqli_query($koneksi, "SELECT * FROM category WHERE id='$id'") or die(mysqli_error($koneksi));
 $row = mysqli_fetch_array($query , MYSQLI_ASSOC);
 ?>

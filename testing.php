@@ -7,4 +7,5 @@ $data = [
 
 echo $data['kategori'];
 
+
 ?>

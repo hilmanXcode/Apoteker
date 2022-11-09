@@ -4,6 +4,7 @@ include '../utilities/validate.php';
 
 $showData = 5;
 
+
 $datas = mysqli_query($koneksi, "SELECT * FROM category LIMIT 0, $showData") or die(mysqli_error($koneksi));
 
 ?>

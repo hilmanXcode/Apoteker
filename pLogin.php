@@ -5,6 +5,7 @@ include 'config/koneksi.php';
 $uname = $_POST['username'];
 $pass = md5($_POST['password']);
 
+
 $filterUname = mysqli_real_escape_string($koneksi, $uname);
 
 $query = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$filterUname' AND password='$pass'") or die(mysqli_error($koneksi));

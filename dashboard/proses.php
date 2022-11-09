@@ -2,6 +2,7 @@
 session_start();
 include '../config/koneksi.php';
 
+
 if(isset($_POST['submit_jenis_obat'])){
     // $data = [
     //     "kategori" => $_POST['cat'],
