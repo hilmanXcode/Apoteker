@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;800&display=swap');
+
+body {
+    background-image: url("../assets/images/bg.webp");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 950px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.box {
+    border-radius: 20px;
+    background-color: #c6e1f3;
+    width: 300px;
+    height: 500px;
+    margin: auto;
+    margin-top: 200px;
+}
+
+.loginText {
+    color: black;
+    font-weight: 800;
+}
+
+.customCssButton {
+    width: 230px;
+    background-color: black;
+}
+
+.customCssButton:hover {
+    width: 230px;
+    background-color: #d3257b;
+}
+
+.sidebar {
+    width: 200px;
+    height: 950px;
+    background-color: #d3257b;
+    position: fixed;
+}
