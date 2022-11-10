@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-if(!isset($_SESSION['username']) && !isset($_SESSION['password'])){
+if(!$_SESSION['username']){
     header("Location: ../index.php");
     session_destroy();
     die();

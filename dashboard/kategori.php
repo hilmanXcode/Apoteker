@@ -86,9 +86,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 ?>
                 <tr>
                     <th scope="row"><?php echo $no++; ?></th>
-                    <td><?php echo $data['kategori']; ?></td>
-                    <td><?php echo $data['deskripsi'] ?></td>
-                    <td><?php echo $data['efekSamping']; ?></td>
+                    <td><?php echo htmlentities($data['kategori']); ?></td>
+                    <td><?php echo htmlentities($data['deskripsi']); ?></td>
+                    <td><?php echo htmlentities($data['efekSamping']); ?></td>
                     <td>
                         <a href="edit_kategori.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Edit</a>
                         <!-- Button trigger modal -->
@@ -107,9 +107,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                                 <div class="modal-body">
                                 <input type="hidden" id="id" name="id" value="<?php echo $data['id']; ?>">
-                                  <p>Jenis Obat : <?php echo $data['kategori']; ?></p>
-                                  <p>Deskripsi Obat : <?php echo $data['deskripsi']; ?></p>
-                                  <p>efekSamping Obat : <?php echo $data['efekSamping']; ?></p>
+                                  <p>Jenis Obat : <?php echo htmlentities($data['kategori']); ?></p>
+                                  <p>Deskripsi Obat : <?php echo htmlentities($data['deskripsi']); ?></p>
+                                  <p>efekSamping Obat : <?php echo htmlentities($data['efekSamping']); ?></p>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>

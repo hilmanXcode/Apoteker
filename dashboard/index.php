@@ -1,7 +1,6 @@
 <?php
-include '../config/koneksi.php';
-
 include '../utilities/validate.php';
+include '../config/koneksi.php';
 
 ?>
 <!DOCTYPE html>
