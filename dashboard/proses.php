@@ -81,6 +81,25 @@ elseif(isset($_POST['hapus_unit'])){
         echo "Gagal";
     }
 }
+elseif(isset($_POST['submit_new_user'])){
+    $username = $_POST['username'];
+    $password = $_POST['pass'];
+    $level = $_POST['level'];
+
+    if($level < 1){
+        header("Location: index.php");
+    }
+
+    $query = mysqli_query($koneksi, "INSERT INTO `users` (`username`, `password`, `level`) VALUES ('$username', '$password', '$level')") or die(mysqli_error($koneksi));
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Pegawai',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: index.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
 else {
     echo "What Are You Doing Here Sir ?";
 }

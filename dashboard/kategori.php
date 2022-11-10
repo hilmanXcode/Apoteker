@@ -69,9 +69,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <div class="">
-        <table class="table table-dark text-center" border="1">
+        <table class="table text-center" border="1">
             <thead>
-                <tr>
+                <tr class="bg-primary">
                 <th scope="col">No</th>
                 <th scope="col">Jenis Obat</th>
                 <th scope="col">Deskripsi Obat</th>
@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $no = 1;
                     foreach($datas as $data) {
                 ?>
-                <tr>
+                <tr class="bg-dark">
                     <th scope="row"><?php echo $no++; ?></th>
                     <td><?php echo htmlentities($data['kategori']); ?></td>
                     <td><?php echo htmlentities($data['deskripsi']); ?></td>

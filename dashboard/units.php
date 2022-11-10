@@ -67,9 +67,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <div class="">
-        <table class="table table-dark text-center" border="1">
+        <table class="table text-center" border="1">
             <thead>
-                <tr>
+                <tr class="bg-primary">
                 <th scope="col">No</th>
                 <th scope="col">Unit</th>
                 <th scope="col">Aksi</th>
@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     $no = 1;
                     foreach($datas as $data) {
                 ?>
-                <tr>
+                <tr class="bg-dark">
                     <td><?php echo $no++ ?></td>
                     <td><?php echo $data['unit']; ?></td>
                     <td>

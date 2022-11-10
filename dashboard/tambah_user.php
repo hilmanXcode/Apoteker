@@ -1,10 +1,10 @@
 <?php
 include '../utilities/validate.php';
-include '../config/koneksi.php';
 
 ?>
-<!DOCTYPE html>
 
+
+<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -25,6 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="icon" href="dist/img/brand-logo.png" type="image/gif" sizes="16x16">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -52,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sistem Informasi Apotek</h1>
+            <h1 class="m-0">Sistem Informasi Apotek | Users</h1>
           </div><!-- /.col -->
         
         </div><!-- /.row -->
@@ -63,54 +64,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Stock Obat</h5>
-                <p class="card-text">Code PHP hereeeee.</p>
-              </div>
+        <div class="box d-flex justify-content-center align-items-center">
+          <form name="formRegister" action="proses.php" onsubmit="return validateForm()" method="post">
+            <h2>Tambah User</h2>
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" id="username" autocomplete="off">
+            <label for="pass">Password</label>
+            <input type="password" class="form-control" name="pass" id="pass" autocomplete="off">
+            <label for="confPass">Confirm Password</label>
+            <input type="password" class="form-control" name="confPass" onkeyup="return validateForm()" id="confPass" autocomplete="off" aria-describedby="validationServer03Pass" required>
+            <select class="form-select mt-3" aria-label="Default select example" name="level">
+                <option selected>Level User</option>
+                <option value="1">Kasir</option>
+                <option value="2">Manager</option>
+            </select>
+            <div id="validationServer03Pass" class="invalid-feedback">
+                Password Tidak Sama!
             </div>
-          </div>
-          <div class="col-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Total Jenis Obat</h5>
-                <p class="card-text">Terdapat <?php 
-                $query = mysqli_query($koneksi, "SELECT * FROM `category`") or die(mysqli_error($koneksi));
-                $num = mysqli_num_rows($query);
-                
-                echo $num;
-                ?> Jenis obat</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Total Unit</h5>
-                <p class="card-text">Terdapat <?php 
-                $query = mysqli_query($koneksi, "SELECT * FROM `units`") or die(mysqli_error($koneksi));
-                $num = mysqli_num_rows($query);
-                
-                echo $num;
-                ?> Unit</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Total Pegawai</h5>
-                <p class="card-text">Terdapat <?php 
-                $query = mysqli_query($koneksi, "SELECT * FROM `users` WHERE level < 1337") or die(mysqli_error($koneksi));
-                $num = mysqli_num_rows($query);
-                
-                echo $num;
-                ?> Pegawai</p>
-              </div>
-            </div>
-          </div>
+            <button class="btn btn-primary mt-3" type="submit" name="submit_new_user">Submit</button>
+          </form>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -143,17 +115,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- REQUIRED SCRIPTS -->
 
+<script>
+    const validateForm = () => {
+        let password = document.getElementById("pass").value;
+        let inputPw = document.getElementById("confPass").classList;    
+        let val = document.getElementById("confPass").value;
+        if(val != password){
+            inputPw.add("is-invalid")
+            return false;
+        }
+        else {
+            inputPw.remove("is-invalid");
+        }
+    }
+
+</script>
+
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<?php
-    if(isset($_SESSION['message'])){
-        echo $_SESSION['message'];
-    }
-    unset($_SESSION['message']);
-?>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 </body>
