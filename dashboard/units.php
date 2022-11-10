@@ -3,6 +3,8 @@ include '../config/koneksi.php';
 include '../utilities/validate.php';
 
 
+$datas = mysqli_query($koneksi, "SELECT * FROM units") or die(mysqli_error($koneksi));
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sistem Informasi Apotek | Kategori</h1>
+            <h1 class="m-0">Sistem Informasi Apotek | Units</h1>
           </div><!-- /.col -->
         
         </div><!-- /.row -->
@@ -64,13 +66,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="box d-flex justify-content-center align-items-center">
-          <form action="proses.php" method="post">
-            <h2>Tambah Unit Obat</h2>
-            <label for="unit">Unit Obat</label>
-            <input type="text" class="form-control" name="unit" id="nama" autocomplete="off">
-            <button class="btn btn-primary mt-2" type="submit" name="submit_unit_obat">Submit</button>
-          </form>
+        <div class="">
+        <table class="table table-dark text-center" border="1">
+            <thead>
+                <tr>
+                <th scope="col">No</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $no = 1;
+                    foreach($datas as $data) {
+                ?>
+                <tr>
+                    <td><?php echo $no++ ?></td>
+                    <td><?php echo $data['unit']; ?></td>
+                    <td>
+                        <a href="edit_unit.php?id=<?php echo $data['id'] ?>" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $data['id']; ?>">
+                          Hapus
+                        </a>
+
+                        <!-- Modal -->
+                        <form action="proses.php" method="post">
+                            <?php
+                                unset($_SESSION['idunit']);
+                                $_SESSION['idunit'] = $data['id'];
+                            ?>
+                          <div class="modal fade text-dark" id="deleteModal<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Unit : <?php echo htmlentities($data['unit']); ?></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-danger" name="hapus_unit">Hapus</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

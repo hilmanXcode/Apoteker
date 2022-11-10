@@ -79,14 +79,14 @@
             <a href="tambah_unit.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Tambah Unit</p>
-                <span class="right badge badge-warning">Soon</span>
+                <span class="right badge badge-danger">New</span>
             </a>
             </li>
             <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="units.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Lihat Unit</p>
-                <span class="right badge badge-warning">Soon</span>
+                <span class="right badge badge-danger">New</span>
             </a>
             </li>
         </ul>

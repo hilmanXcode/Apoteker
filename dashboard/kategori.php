@@ -98,6 +98,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <!-- Modal -->
                         <form action="proses.php" method="post">
+                          <?php
+                            unset($_SESSION['idcat']);
+                            $_SESSION['idcat'] = $data['id'];
+                          ?>
                           <div class="modal fade text-dark" id="delete<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
@@ -106,7 +110,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                <input type="hidden" id="id" name="id" value="<?php echo $data['id']; ?>">
                                   <p>Jenis Obat : <?php echo htmlentities($data['kategori']); ?></p>
                                   <p>Deskripsi Obat : <?php echo htmlentities($data['deskripsi']); ?></p>
                                   <p>efekSamping Obat : <?php echo htmlentities($data['efekSamping']); ?></p>

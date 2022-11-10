@@ -2,6 +2,17 @@
 include '../config/koneksi.php';
 include '../utilities/validate.php';
 
+$id = $_GET['id'];
+$_SESSION['idunit'] = $id;
+
+if(!$id){
+    header("Location: units.php");
+}
+
+$datas = mysqli_query($koneksi, "SELECT * FROM units WHERE id='$id'") or die(mysqli_error($koneksi));
+$row = mysqli_fetch_array($datas, MYSQLI_ASSOC);
+
+
 
 ?>
 
@@ -53,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sistem Informasi Apotek | Kategori</h1>
+            <h1 class="m-0">Sistem Informasi Apotek | Units</h1>
           </div><!-- /.col -->
         
         </div><!-- /.row -->
@@ -66,10 +77,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="box d-flex justify-content-center align-items-center">
           <form action="proses.php" method="post">
-            <h2>Tambah Unit Obat</h2>
+            <h2>Edit Unit Obat</h2>
             <label for="unit">Unit Obat</label>
-            <input type="text" class="form-control" name="unit" id="nama" autocomplete="off">
-            <button class="btn btn-primary mt-2" type="submit" name="submit_unit_obat">Submit</button>
+            <input type="text" class="form-control" name="unit" id="nama" autocomplete="off" value="<?php echo $row['unit']; ?>">
+            <a href="units.php" class="btn btn-primary mt-2">Kembali</a>
+            <button class="btn btn-warning mt-2" type="submit" name="edit_unit_obat">Edit</button>
           </form>
         </div>
         <!-- /.row -->

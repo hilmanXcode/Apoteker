@@ -17,7 +17,6 @@ if($num != 0){
         $_SESSION['level'] = $row['level'];
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai Owner!',icon: 'success',confirmButtonText: 'Close'})</script>";
     }
-    $_SESSION['anjay'] = "Heyyyyyy";
     $_SESSION['id'] = $row['id'];
     $_SESSION['username'] = $row['username'];
     $_SESSION['password'] = $row['password'];

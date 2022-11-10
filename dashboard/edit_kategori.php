@@ -3,6 +3,7 @@ include '../config/koneksi.php';
 include '../utilities/validate.php';
 
 $id = $_GET['id'];
+$_SESSION['idcat'] = $id;
 
 if(!$id){
     header("Location: kategori.php");
@@ -76,7 +77,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="box d-flex justify-content-center align-items-center">
           <form action="proses.php" method="post">
             <h2>Edit Kategori Obat</h2>
-            <input type="hidden" id="id" name="id" value="<?php echo $id; ?>">
             <label for="nama">Kategori Obat</label>
             <input type="text" class="form-control" name="cat" id="nama" autocomplete="off" value="<?php echo $row['kategori']; ?>">
             <label for="nama">Deskripsi</label>
