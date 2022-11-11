@@ -25,7 +25,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <link rel="icon" href="dist/img/brand-logo.png" type="image/gif" sizes="16x16">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -36,7 +35,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="dist/img/brand-logo.png" alt="Hospital Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">SI Apoteker</span>
+      <span class="brand-text font-weight-light text-decoration-none">SI Apoteker</span>
     </a>
 
     <!-- Sidebar -->
@@ -73,8 +72,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <input type="password" class="form-control" name="pass" id="pass" autocomplete="off">
             <label for="confPass">Confirm Password</label>
             <input type="password" class="form-control" name="confPass" onkeyup="return validateForm()" id="confPass" autocomplete="off" aria-describedby="validationServer03Pass" required>
-            <select class="form-select mt-3" aria-label="Default select example" name="level">
-                <option selected>Level User</option>
+            <label for="level">Level User</label>
+            <select class="form-select" aria-label="Default select example" name="level">
                 <option value="1">Kasir</option>
                 <option value="2">Manager</option>
             </select>
@@ -91,15 +90,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
   <footer class="main-footer">

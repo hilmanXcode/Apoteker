@@ -23,3 +23,11 @@ body {
 .form-control {
     width: 450px;
 }
+
+.form-select {
+    width: 450px;
+    height: 35px;
+    border-style: none;
+    border-radius: 5px;
+    display: flex;
+}

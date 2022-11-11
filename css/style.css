@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700;800&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 body {
     background-image: url("../assets/images/bg.webp");
@@ -6,7 +6,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 950px;
-    font-family: 'Kanit', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .box {
@@ -16,6 +16,7 @@ body {
     height: 500px;
     margin: auto;
     margin-top: 200px;
+    letter-spacing: 2px;
 }
 
 .loginText {

@@ -83,21 +83,17 @@ elseif(isset($_POST['hapus_unit'])){
 }
 elseif(isset($_POST['submit_new_user'])){
     $username = $_POST['username'];
-    $password = $_POST['pass'];
+    $password = md5($_POST['pass']);
     $level = $_POST['level'];
 
-    if($level < 1){
+    if($level < 1 || $level > 2){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Silahkan Pilih Level User!',icon: 'error',confirmButtonText: 'OK'})</script>";
         header("Location: index.php");
     }
-
-    $query = mysqli_query($koneksi, "INSERT INTO `users` (`username`, `password`, `level`) VALUES ('$username', '$password', '$level')") or die(mysqli_error($koneksi));
-
-    if($query){
+    else{
+        $query = mysqli_query($koneksi, "INSERT INTO `users` (`username`, `password`, `level`) VALUES ('$username', '$password', '$level')") or die(mysqli_error($koneksi));
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Pegawai',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: index.php");
-    }
-    else {
-        echo "Gagal";
     }
 }
 else {

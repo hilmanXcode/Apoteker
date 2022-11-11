@@ -19,7 +19,11 @@ if($num != 0){
     }
     elseif($row['level'] == 1){
         $_SESSION['level'] = $row['level'];
-        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai User biasa!',icon: 'success',confirmButtonText: 'Close'})</script>";
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai Kasir!',icon: 'success',confirmButtonText: 'Close'})</script>";
+    }
+    elseif($row['level'] == 2){
+        $_SESSION['level'] = $row['level'];
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai Manager!',icon: 'success',confirmButtonText: 'Close'})</script>";
     }
     $_SESSION['id'] = $row['id'];
     $_SESSION['username'] = $row['username'];

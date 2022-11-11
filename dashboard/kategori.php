@@ -2,10 +2,18 @@
 include '../config/koneksi.php';
 include '../utilities/validate.php';
 
-$showData = 5;
+$batas = 10;
+$halaman = isset($_GET['halaman'])? (int)$_GET['halaman'] : 1;
+$halaman_awal = ($halaman > 1 ) ? ($halaman * $batas) - $batas : 0;	
 
+$previous = $halaman - 1;
+$next = $halaman + 1;
 
-$datas = mysqli_query($koneksi, "SELECT * FROM category LIMIT 0, $showData") or die(mysqli_error($koneksi));
+$data = mysqli_query($koneksi,"SELECT * FROM category");
+$jumlah_data = mysqli_num_rows($data);
+$total_halaman = ceil($jumlah_data / $batas);
+$datas = mysqli_query($koneksi, "SELECT * FROM category LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
+$no = $halaman_awal + 1;
 
 ?>
 
@@ -81,7 +89,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </thead>
             <tbody>
                 <?php
-                    $no = 1;
                     foreach($datas as $data) {
                 ?>
                 <tr class="bg-dark">
@@ -128,6 +135,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <?php } ?>
             </tbody>
         </table>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
+          </li>
+          <?php 
+          for($x= 1; $x <= $total_halaman; $x++){
+            ?> 
+            <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+            <?php
+          }
+          ?>				
+          <li class="page-item">
+            <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
+          </li>
+        </ul>
+      </nav>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
