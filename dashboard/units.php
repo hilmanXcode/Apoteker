@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 ?>
                 <tr class="bg-dark">
                     <td><?php echo $no++ ?></td>
-                    <td><?php echo $data['unit']; ?></td>
+                    <td><?php echo htmlentities($data['unit']); ?></td>
                     <td>
                         <a href="edit_unit.php?id=<?php echo $data['id'] ?>" class="btn btn-warning">Edit</a>
                         <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $data['id']; ?>">

@@ -14,9 +14,12 @@ if(isset($_POST['submit_jenis_obat'])){
     $deskripsi = $_POST['desc'];
     $efekSamping = $_POST['efek'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO `category` (`kategori`, `deskripsi`, `efekSamping`) VALUES ('$kategori', '$deskripsi', '$efekSamping')");
-
-    if($query){
+    if(!preg_match("/^[a-zA-Z-']*$/",$kategori) || $kategori == "" || $deskripsi == "" || $efekSamping = ""){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kolom Wajib Di Isi!',icon: 'error',confirmButtonText: 'OK'})</script>";
+        header("Location: tambah_kategori_obat.php");
+    }
+    else{
+        $query = mysqli_query($koneksi, "INSERT INTO `category` (`kategori`, `deskripsi`, `efekSamping`) VALUES ('$kategori', '$deskripsi', '$efekSamping')");
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Data Berhasil Di Tambahkan!',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: index.php");
     }
