@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Stock Obat</h5>
+                <h5 class="card-title">Obat</h5>
                 <p class="card-text">Tersedia <?php
                   $query = mysqli_query($koneksi, "SELECT * FROM obat");
                   $num = mysqli_num_rows($query);
@@ -131,6 +131,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   }
                   echo $total;
                 ?> Obat Kadaluarsa</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Stock Obat</h5>
+                <p class="card-text">Terdapat <?php
+                  $query = mysqli_query($koneksi, "SELECT * FROM obat");
+                  
+                  $totalObat = 0;
+                  foreach($query as $data){
+                    $totalObat+= $data['Stock'];
+                  }
+                  echo $totalObat;
+                ?> obat</p>
               </div>
             </div>
           </div>

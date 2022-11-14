@@ -34,24 +34,24 @@
                     </a>
                     </li>
                     <li class='nav-item'>
-                    <a href='testing.html' class='nav-link'>
+                    <a href='obat.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Lihat Obat</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                     <li class='nav-item'>
-                    <a href='testing.html' class='nav-link'>
+                    <a href='obat_kadaluarsa.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Obat Kadaluwarsa</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>Soon</span>
                     </a>
                     </li>
                     <li class='nav-item'>
-                    <a href='testing.html' class='nav-link'>
+                    <a href='obat_habis.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Obat Habis</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                 </ul>
