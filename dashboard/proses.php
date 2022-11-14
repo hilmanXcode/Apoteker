@@ -99,6 +99,38 @@ elseif(isset($_POST['submit_new_user'])){
         header("Location: index.php");
     }
 }
+elseif(isset($_POST['submit_pemasok'])){
+    $nama = $_POST['nama'];
+
+    $query = mysqli_query($koneksi, "INSERT INTO pemasok (nama) VALUES ('$nama')");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Pemasok',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: index.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
+elseif(isset($_POST['submit_obat'])){
+    $nama = $_POST['namaobat'];
+    $penyimpanan = $_POST['penyimpanan'];
+    $stock = $_POST['stock'];
+    $unit = $_POST['unit'];
+    $kategori = $_POST['kategori'];
+    $kadaluarsa = date('Y-m-d', strtotime($_POST['kadaluarsa']));
+    $deskripsi = $_POST['deskripsi'];
+    $hargabeli = $_POST['hargabeli'];
+    $hargajual = $_POST['hargajual'];
+    $pemasok = $_POST['pemasok'];
+
+    $query = mysqli_query($koneksi, "INSERT INTO obat (nama, penyimpanan, Stock, Unit, kategori, t_kadaluarsa, deskripsi, h_beli, h_jual, pemasok) VALUES ('$nama', '$penyimpanan', $stock, '$unit', '$kategori', '$kadaluarsa', '$deskripsi', $hargabeli, $hargajual, '$pemasok')");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Obat',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: index.php");
+    }
+}
 else {
     echo "What Are You Doing Here Sir ?";
 }

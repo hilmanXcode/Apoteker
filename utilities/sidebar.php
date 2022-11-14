@@ -27,10 +27,10 @@
                 </a>
                 <ul class='nav nav-treeview'>
                     <li class='nav-item'>
-                    <a href='testing.html' class='nav-link'>
+                    <a href='tambah_obat.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Tambah Obat</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                     <li class='nav-item'>
@@ -105,10 +105,10 @@
                 </a>
                 <ul class='nav nav-treeview'>
                     <li class='nav-item'>
-                    <a href='#' class='nav-link'>
+                    <a href='tambah_pemasok.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Tambah Pemasok</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                     <li class='nav-item'>
@@ -190,10 +190,10 @@
                     </a>
                     </li>
                     <li class='nav-item'>
-                    <a href='#' class='nav-link'>
+                    <a href='users.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Lihat Data Pegawai</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                 </ul>

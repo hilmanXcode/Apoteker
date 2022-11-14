@@ -9,11 +9,10 @@ $halaman_awal = ($halaman > 1 ) ? ($halaman * $batas) - $batas : 0;
 $previous = $halaman - 1;
 $next = $halaman + 1;
 
-$data = mysqli_query($koneksi,"SELECT * FROM category");
+$data = mysqli_query($koneksi,"SELECT * FROM users");
 $jumlah_data = mysqli_num_rows($data);
 $total_halaman = ceil($jumlah_data / $batas);
-$datas = mysqli_query($koneksi, "SELECT * FROM category LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
-$no = $halaman_awal + 1;
+$datas = mysqli_query($koneksi, "SELECT * FROM users WHERE level < 1337 LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
 
 ?>
 
@@ -76,83 +75,63 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="">
-        <table class="table text-center" border="1">
-            <thead>
-                <tr class="bg-primary">
-                <th scope="col">No</th>
-                <th scope="col">Jenis Obat</th>
-                <th scope="col">Deskripsi Obat</th>
-                <th scope="col">Efek Samping Obat</th>
-                <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    foreach($datas as $data) {
-                ?>
-                <tr class="bg-dark">
-                    <th scope="row"><?php echo $no++; ?></th>
-                    <td><?php echo htmlentities(ucwords($data['kategori'])); ?></td>
-                    <td><?php echo htmlentities(ucwords($data['deskripsi'])); ?></td>
-                    <td><?php echo htmlentities(ucwords($data['efekSamping'])); ?></td>
+      <table class="table text-center" border="1">
+        <thead>
+            <tr class="bg-primary">
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Level</th>
+            <th scope="col">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach($datas as $data) {
+            ?>
+            <tr class="bg-dark">
+                <td>
+                    <?php echo htmlentities(ucwords($data['id'])); ?>
+                </td>
+                <td>
+                    <?php echo htmlentities(ucwords($data['username'])); ?>
+                </td>
+                <td>
+                    <?php
+                        if($data['level'] == 1)
+                        {
+                            echo htmlentities("Kasir");
+                        }
+                        elseif($data['level'] == 2)
+                        {
+                            echo htmlentities("Manajer");
+                        }
+                    ?>
                     <td>
-                        <a href="edit_kategori.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Edit</a>
-                        <!-- Button trigger modal -->
-                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $data['id']; ?>">
-                          Hapus
-                        </a>
-
-                        <!-- Modal -->
-                        <form action="proses.php" method="post">
-                          <?php
-                            unset($_SESSION['idcat']);
-                            $_SESSION['idcat'] = $data['id'];
-                          ?>
-                          <div class="modal fade text-dark" id="delete<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                  <p>Jenis Obat : <?php echo htmlentities(ucwords($data['kategori'])); ?></p>
-                                  <p>Deskripsi Obat : <?php echo htmlentities(ucwords($data['deskripsi'])); ?></p>
-                                  <p>efekSamping Obat : <?php echo htmlentities(ucwords($data['efekSamping'])); ?></p>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
-                                  <button type="submit" class="btn btn-danger" name="hapus_category">Hapus</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-                        
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Hapus</a>
                     </td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-      <nav>
+                </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <nav>
         <ul class="pagination justify-content-center">
-          <li class="page-item">
+            <li class="page-item">
             <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
-          </li>
-          <?php 
-          for($x= 1; $x <= $total_halaman; $x++){
+            </li>
+            <?php 
+            for($x= 1; $x <= $total_halaman; $x++){
             ?> 
             <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
             <?php
-          }
-          ?>				
-          <li class="page-item">
+            }
+            ?>				
+            <li class="page-item">
             <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
-          </li>
+            </li>
         </ul>
-      </nav>
-        </div>
+    </nav>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
