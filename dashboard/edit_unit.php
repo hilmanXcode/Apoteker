@@ -2,7 +2,7 @@
 include '../config/koneksi.php';
 include '../utilities/validate.php';
 
-$id = $_GET['id'];
+$id = mysqli_real_escape_string($koneksi, $_GET['id']);
 $_SESSION['idunit'] = $id;
 
 if(!$id){

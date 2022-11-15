@@ -1,7 +1,8 @@
 <?php
-include '../config/koneksi.php';
 include '../utilities/validate.php';
+include '../config/koneksi.php';
 
+// Pagination
 $batas = 10;
 $halaman = isset($_GET['halaman'])? (int)$_GET['halaman'] : 1;
 $halaman_awal = ($halaman > 1 ) ? ($halaman * $batas) - $batas : 0;	
@@ -14,6 +15,13 @@ $jumlah_data = mysqli_num_rows($data);
 $total_halaman = ceil($jumlah_data / $batas);
 $datas = mysqli_query($koneksi, "SELECT * FROM obat LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
 $no = $halaman_awal + 1;
+// End Pagination
+
+// Necessary
+$units = mysqli_query($koneksi, "SELECT * FROM units");
+$supplier = mysqli_query($koneksi, "SELECT * FROM pemasok");
+$kategories = mysqli_query($koneksi, "SELECT * FROM category");
+// End Necessary
 
 ?>
 
@@ -93,20 +101,111 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </thead>
             <tbody>
                 <?php
-                    foreach($datas as $data) {
+                    foreach($datas as $dataobat) {
                 ?>
                 <tr class="bg-dark">
                     <th scope="row"><?php echo $no++; ?></th>
-                    <td><?php echo htmlentities($data['nama']); ?></td>
-                    <td><?php echo htmlentities($data['penyimpanan']); ?></td>
-                    <td><?php echo htmlentities($data['kategori']); ?></td>
-                    <td><?php echo htmlentities($data['Stock']) ?></td>
-                    <td><?php echo htmlentities($data['t_kadaluarsa']); ?></td>
-                    <td><?php echo htmlentities($data['h_jual']); ?></td>
-                    <td><?php echo htmlentities($data['Unit']); ?></td>
+                    <td><?php echo htmlentities($dataobat['nama']); ?></td>
+                    <td><?php echo htmlentities($dataobat['penyimpanan']); ?></td>
+                    <td><?php echo htmlentities($dataobat['kategori']); ?></td>
+                    <td><?php echo htmlentities($dataobat['Stock']) ?></td>
+                    <td><?php echo htmlentities($dataobat['t_kadaluarsa']); ?></td>
+                    <td><?php echo htmlentities($dataobat['h_jual']); ?></td>
+                    <td><?php echo htmlentities($dataobat['Unit']); ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
+                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?php echo $dataobat['id']; ?>">Edit</a>
+                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $dataobat['id']; ?>">
+                          Hapus
+                        </a>
+
+                        <!-- Modal Hapus -->
+                        <form action="proses.php" method="post">
+                          <div class="modal fade text-dark" id="delete<?php echo $dataobat['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>Jenis Obat : <?php echo htmlentities(ucwords($dataobat['nama'])); ?></p>
+                                  <p>Deskripsi Obat : <?php echo htmlentities(ucwords($dataobat['penyimpanan'])); ?></p>
+                                  <p>efekSamping Obat : <?php echo htmlentities(ucwords($dataobat['kategori'])); ?></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-danger" name="hapus_category">Hapus</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                        <!-- Akhir Modal Hapus -->
+
+                        <!-- Modal Edit -->
+                        <form action="proses.php" method="post">
+                          <div class="modal fade text-dark" id="edit<?php echo $dataobat['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Obat <?php echo $_SESSION['idobat']; ?></h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body bg-dark">
+                                  <label for="namaobat">Nama Obat</label>
+                                  <input class="form-control" type="text" name="namaobat" id="namaobat" value="<?php echo htmlentities($dataobat['nama']); ?>">
+                                  <label for="namaobat">Penyimpanan</label>
+                                  <input class="form-control" type="text" name="penyimpanan" id="penyimpanan" value="<?php echo htmlentities($dataobat['penyimpanan']); ?>">
+                                  <label for="namaobat">Banyak Stock</label>
+                                  <input class="form-control" type="number" name="stock" id="stock" value="<?php echo htmlentities($dataobat['Stock']); ?>">
+                                  <label for="unit">Unit</label>
+                                  <select class="form-select" aria-label="Default select example" name="unit">
+                                    <option selected value="<?php echo $dataobat['Unit']; ?>"><?php echo htmlentities($dataobat['Unit']); ?></option>
+                                  <?php 
+                                    foreach($units as $unit) {
+                                      if($dataobat['Unit'] != $unit['unit']){
+                                  ?>
+                                      <option value="<?php echo $unit['unit']; ?>"><?php echo htmlentities(ucwords($unit['unit'])); ?></option>
+                                  <?php }} ?>
+                                  </select>
+                                  <label for="kategori">Kategori</label>
+                                  <select class="form-select" aria-label="Default select example" name="kategori">
+                                    <option selected value="<?php echo $dataobat['kategori']; ?>"><?php echo htmlentities($dataobat['kategori']); ?></option>
+                                  <?php 
+                                    foreach($kategories as $kategori) {
+                                      if($dataobat['kategori'] != $kategori['kategori']){
+                                  ?>
+                                      <option value="<?php echo $kategori['kategori']; ?>"><?php echo htmlentities(ucwords($kategori['kategori'])); ?></option>
+                                  <?php }} ?>
+                                  </select>
+                                  <label for="kadaluarsa">Tanggal Kadaluarsa</label>
+                                  <input type="date" class="form-control" name="kadaluarsa" id="kadaluarsa" autocomplete="off" value="<?php echo $dataobat['t_kadaluarsa']; ?>">
+                                  <label for="deskripsi">Deskripsi</label>
+                                  <textarea style="height: 213px; resize: none;" name="deskripsi" class="form-control" placeholder="Deskripsi" id="floatingTextarea" autocomplete="off"><?php echo htmlentities($dataobat['deskripsi']); ?></textarea>
+                                  <label for="hargabeli">Harga Beli (Rp)</label>
+                                  <input type="number" class="form-control" name="hargabeli" id="hargabeli" autocomplete="off" value="<?php echo htmlentities($dataobat['h_beli']); ?>">
+                                  <input type="hidden" name="idobat" value="<?php echo $dataobat['id']; ?>">
+                                  <label for="hargajual">Harga Jual (Rp)</label>
+                                  <input type="number" class="form-control" name="hargajual" id="hargajual" autocomplete="off" value="<?php echo htmlentities($dataobat['h_jual']); ?>">
+                                  <label for="pemasok">Nama Pemasok</label>
+                                  <select class="form-select" aria-label="Default select example" name="pemasok">
+                                    <option selected value="<?php echo $dataobat['pemasok']; ?>"><?php echo htmlentities($dataobat['pemasok']); ?></option>
+                                  <?php
+                                    foreach($supplier as $pemasok){
+                                      if($dataobat['pemasok'] != $pemasok['nama']){
+                                  ?>
+                                    <option value="<?php echo $pemasok['nama']; ?>"><?php echo $pemasok['nama']; ?></option>
+                                  <?php }} ?>
+                                  </select>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-warning" name="edit_obat">Edit</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
                     </td>
                 </tr>
                 <?php } ?>

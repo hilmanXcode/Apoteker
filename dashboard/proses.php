@@ -42,9 +42,9 @@ elseif(isset($_POST['hapus_category'])){
     $query = mysqli_query($koneksi, "DELETE FROM category WHERE id='$id'") or die(mysqli_error($koneksi));
 
     if($query){
-        unset($_SESSION['idcat']);
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Data Berhasil Hapus!',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: kategori.php");
+        unset($_SESSION['idcat']);
     }
 }
 elseif(isset($_POST['submit_unit_obat'])){
@@ -130,6 +130,30 @@ elseif(isset($_POST['submit_obat'])){
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Obat',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: index.php");
     }
+}
+elseif(isset($_POST['edit_obat'])){
+    $id = $_POST['idobat'];
+    $nama = $_POST['namaobat'];
+    $penyimpanan = $_POST['penyimpanan'];
+    $stock = $_POST['stock'];
+    $unit = $_POST['unit'];
+    $kategori = $_POST['kategori'];
+    $kadaluarsa = date('Y-m-d', strtotime($_POST['kadaluarsa']));
+    $deskripsi = $_POST['deskripsi'];
+    $hargabeli = $_POST['hargabeli'];
+    $hargajual = $_POST['hargajual'];
+    $pemasok = $_POST['pemasok'];
+
+    $query = mysqli_query($koneksi, "UPDATE `obat` SET nama='$nama', penyimpanan='$penyimpanan', Stock='$stock', Unit='$unit', kategori='$kategori', t_kadaluarsa='$kadaluarsa', deskripsi='$deskripsi', h_beli='$hargabeli', h_jual='$hargajual', pemasok='$pemasok' WHERE id='$id'") or die(mysqli_error($koneksi));;
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Mengubah Data Obat',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: obat.php");
+    }
+    else{
+        echo "Gagal";
+    }
+
 }
 else {
     echo "What Are You Doing Here Sir ?";
