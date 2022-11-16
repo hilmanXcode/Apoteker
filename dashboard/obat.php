@@ -123,18 +123,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <div class="modal fade text-dark" id="delete<?php echo $dataobat['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-primary">
                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                  <p>Jenis Obat : <?php echo htmlentities(ucwords($dataobat['nama'])); ?></p>
-                                  <p>Deskripsi Obat : <?php echo htmlentities(ucwords($dataobat['penyimpanan'])); ?></p>
-                                  <p>efekSamping Obat : <?php echo htmlentities(ucwords($dataobat['kategori'])); ?></p>
+                                <div class="modal-body text-left bg-dark">
+                                  <input type="hidden" name="id" value="<?php echo $dataobat['id']; ?>">
+                                  <p>Nama Obat : <?php echo htmlentities(ucwords($dataobat['nama'])); ?></p>
+                                  <p>Penyimpanan : <?php echo htmlentities(ucwords($dataobat['penyimpanan'])); ?></p>
+                                  <p>Kategori : <?php echo htmlentities(ucwords($dataobat['kategori'])); ?></p>
+                                  <p>Stock : <?php echo htmlentities(ucwords($dataobat['Stock'])); ?></p>
+                                  <p>Tanggal Kadaluarsa : <?php echo htmlentities(ucwords($dataobat['t_kadaluarsa'])); ?></p>
+                                  <p>Harga Jual : <?php echo htmlentities(ucwords($dataobat['h_jual'])); ?></p>
+                                  <p>Unit : <?php echo htmlentities(ucwords($dataobat['Unit'])); ?></p>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer bg-dark">
                                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
-                                  <button type="submit" class="btn btn-danger" name="hapus_category">Hapus</button>
+                                  <button type="submit" class="btn btn-danger" name="hapus_obat">Hapus</button>
                                 </div>
                               </div>
                             </div>
@@ -148,7 +153,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header bg-primary">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Obat <?php echo $_SESSION['idobat']; ?></h1>
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Obat</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body bg-dark">

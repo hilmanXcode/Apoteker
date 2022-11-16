@@ -65,7 +65,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="box d-flex justify-content-center align-items-center">
           <form name="formRegister" action="proses.php" onsubmit="return validateForm()" method="post">
-            <h2>Tambah User</h2>
+            <h2>Tambah Pegawai</h2>
+            <label for="npegawai">Nama Pegawai</label>
+            <input type="text" class="form-control" name="npegawai" id="npegawai" autocomplete="off">
             <label for="username">Username</label>
             <input type="text" class="form-control" name="username" id="username" autocomplete="off">
             <label for="pass">Password</label>

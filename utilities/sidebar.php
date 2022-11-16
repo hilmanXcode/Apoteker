@@ -44,7 +44,7 @@
                     <a href='obat_kadaluarsa.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Obat Kadaluwarsa</p>
-                        <span class='right badge badge-danger'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                     <li class='nav-item'>
@@ -112,10 +112,10 @@
                     </a>
                     </li>
                     <li class='nav-item'>
-                    <a href='#' class='nav-link'>
+                    <a href='pemasok.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Lihat Pemasok</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                 </ul>

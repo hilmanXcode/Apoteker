@@ -70,10 +70,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <input type="text" class="form-control" name="cat" id="nama" autocomplete="off">
             <label for="nama">Deskripsi</label>
             <input type="text" class="form-control" name="desc" id="nama" autocomplete="off">
-            <div class="form-floating mt-2">
-                <textarea style="height: 213px; resize: none;" name="efek" class="form-control" placeholder="Efek Samping" id="floatingTextarea" autocomplete="off"></textarea>
-                <label for="floatingTextarea"></label>
-            </div>
+            <label for="efek">Efek Samping</label>
+            <textarea style="height: 213px; resize: none;" name="efek" class="form-control" placeholder="Efek Samping" id="floatingTextarea" autocomplete="off"></textarea>
             <button class="btn btn-primary" type="submit" name="submit_jenis_obat">Submit</button>
           </form>
         </div>

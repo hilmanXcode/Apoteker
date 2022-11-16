@@ -97,31 +97,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <td><?php echo htmlentities(ucwords($data['deskripsi'])); ?></td>
                     <td><?php echo htmlentities(ucwords($data['efekSamping'])); ?></td>
                     <td>
-                        <a href="edit_kategori.php?id=<?php echo $data['id']; ?>" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?php echo $data['id']; ?>">Edit</a>
                         <!-- Button trigger modal -->
                         <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $data['id']; ?>">
                           Hapus
                         </a>
 
-                        <!-- Modal -->
+                        <!-- Modal Hapus -->
                         <form action="proses.php" method="post">
-                          <?php
-                            unset($_SESSION['idcat']);
-                            $_SESSION['idcat'] = $data['id'];
-                          ?>
                           <div class="modal fade text-dark" id="delete<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-primary">
                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body text-left bg-dark">
+                                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
                                   <p>Jenis Obat : <?php echo htmlentities(ucwords($data['kategori'])); ?></p>
                                   <p>Deskripsi Obat : <?php echo htmlentities(ucwords($data['deskripsi'])); ?></p>
-                                  <p>efekSamping Obat : <?php echo htmlentities(ucwords($data['efekSamping'])); ?></p>
+                                  <p>Efek Samping Obat : <?php echo htmlentities(ucwords($data['efekSamping'])); ?></p>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer bg-dark">
                                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
                                   <button type="submit" class="btn btn-danger" name="hapus_category">Hapus</button>
                                 </div>
@@ -129,7 +126,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                           </div>
                         </form>
+                        <!-- End Modal Hapus -->
                         
+                        <!-- Modal Edit -->
+                        <form action="proses.php" method="post">
+                          <div class="modal fade text-dark" id="edit<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Kategori</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body bg-dark text-left">
+                                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                  <label for="cat">Jenis Obat</label>
+                                  <input type="text" class="form-control" name="cat" value="<?php echo $data['kategori']; ?>">
+                                  <label for="desc">Deskripsi</label>
+                                  <input type="text" class="form-control" name="desc" value="<?php echo $data['deskripsi']; ?>">
+                                  <label for="efek">Efek Samping</label>
+                                  <textarea style="height: 213px; resize: none;" name="efek" class="form-control" placeholder="Efek Samping" id="floatingTextarea" autocomplete="off"><?php echo $data['efekSamping']; ?></textarea>
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-warning" name="edit_jenis_obat">Edit</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                        <!-- Akhir Modal Edit -->
                     </td>
                 </tr>
                 <?php } ?>

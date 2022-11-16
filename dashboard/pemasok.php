@@ -9,10 +9,11 @@ $halaman_awal = ($halaman > 1 ) ? ($halaman * $batas) - $batas : 0;
 $previous = $halaman - 1;
 $next = $halaman + 1;
 
-$data = mysqli_query($koneksi,"SELECT * FROM users");
+$data = mysqli_query($koneksi,"SELECT * FROM pemasok");
 $jumlah_data = mysqli_num_rows($data);
 $total_halaman = ceil($jumlah_data / $batas);
-$datas = mysqli_query($koneksi, "SELECT * FROM users WHERE level < 1337 LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
+$datas = mysqli_query($koneksi, "SELECT * FROM pemasok LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
+$no = $halaman_awal + 1;
 
 ?>
 
@@ -64,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Sistem Informasi Apotek | Pegawai</h1>
+            <h1 class="m-0">Sistem Informasi Apotek | Pemasok</h1>
           </div><!-- /.col -->
         
         </div><!-- /.row -->
@@ -75,47 +76,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-      <table class="table text-center" border="1">
-        <thead>
-            <tr class="bg-primary">
-            <th scope="col">ID</th>
-            <th scope="col">Nama Pegawai</th>
-            <th scope="col">Username</th>
-            <th scope="col">Level</th>
+
+      <table class="table text-center">
+        <thead class="bg-primary">
+            <tr>
+            <th scope="col">No</th></th>
+            <th scope="col">Nama Pemasok</th>
             <th scope="col">Aksi</th>
             </tr>
         </thead>
-        <tbody>
-            <?php
-                foreach($datas as $data) {
-            ?>
-            <tr class="bg-dark">
+        <tbody class="bg-dark">
+          <?php
+            foreach($datas as $data) {
+          ?>
+            <tr>
+                <th scope="row"><?php echo $no++; ?></th>
+                <td><?php echo htmlentities($data['nama']); ?></td>
                 <td>
-                    <?php echo htmlentities(ucwords($data['id'])); ?>
-                </td>
-                <td>
-                  <?php echo htmlentities(ucwords($data['nama_pegawai'])); ?>
-                </td>
-                <td>
-                    <?php echo htmlentities(ucwords($data['username'])); ?>
-                </td>
-                <td>
-                    <?php
-                        if($data['level'] == 1)
-                        {
-                            echo htmlentities("Kasir");
-                        }
-                        elseif($data['level'] == 2)
-                        {
-                            echo htmlentities("Manajer");
-                        }
-                    ?>
-                    <td>
-                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?php echo $data['id']; ?>">Edit</a>
-                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $data['id']; ?>">Hapus</a>
+                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?php echo $data['id']; ?>">Edit</a>
+                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $data['id']; ?>">Hapus</a>
 
-                        <!-- Modal Hapus -->
-                        <form action="proses.php" method="post">
+                    <!-- Modal Hapus -->
+                    <form action="proses.php" method="post">
                         <div class="modal fade text-dark" id="delete<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -125,82 +107,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                               <div class="modal-body text-left bg-dark">
                                 <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                                <p>Nama Pegawai : <?php echo htmlentities(ucwords($data['nama_pegawai'])); ?></p>
-                                <p>Username : <?php echo htmlentities(ucwords($data['username'])); ?></p>
-                                <p>Level : <?php
-                                  if($data['level'] == 1)
-                                  {
-                                      echo htmlentities("Kasir");
-                                  }
-                                  elseif($data['level'] == 2)
-                                  {
-                                      echo htmlentities("Manajer");
-                                  }
-                                ?></p>
+                                <p>Nama Pemasok : <?php echo htmlentities(ucwords($data['nama'])); ?></p>
                               </div>
                               <div class="modal-footer bg-dark">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
-                                <button type="submit" class="btn btn-danger" name="hapus_pegawai">Hapus</button>
+                                <button type="submit" class="btn btn-danger" name="hapus_pemasok">Hapus</button>
                               </div>
                             </div>
-                           </div>
                           </div>
-                        </form>
-                        <!-- Akhir Modal Hapus -->
+                        </div>
+                      </form>
+                      <!-- Akhir Modal Hapus -->
 
-                        <!-- Modal Edit -->
-                        <form action="proses.php" method="post">
+                      <!-- Modal Edit -->
+                      <form action="proses.php" method="post">
                         <div class="modal fade text-dark" id="edit<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header bg-primary">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Pemasok</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <div class="modal-body text-left bg-dark">
+                              <div class="modal-body bg-dark">
                                 <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                                <label for="nama">Nama Pegawai</label>
-                                <input type="text" class="form-control" name="nama" value="<?php echo $data['nama_pegawai']; ?>">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" name="username" value="<?php echo $data['username']; ?>">
-                                <label for="level">Level</label>
-                                <select class="form-select" aria-label="Default select example" name="level">
-                                    <option value="1">Kasir</option>
-                                    <option value="2">Manager</option>
-                                </select>
+                                <label for="pemasok">Nama Pemasok</label>
+                                <input type="text" class="form-control" name="pemasok" value="<?php echo $data['nama']; ?>">
                               </div>
                               <div class="modal-footer bg-dark">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
-                                <button type="submit" class="btn btn-warning" name="edit_pegawai">Edit</button>
+                                <button type="submit" class="btn btn-warning" name="edit_pemasok">Edit</button>
                               </div>
                             </div>
-                           </div>
                           </div>
-                        </form>
-                        <!-- Akhir Modal Edit -->
-                    </td>
+                        </div>
+                      </form>
+                      <!-- Akhir Modal Edit -->
                 </td>
             </tr>
-            <?php } ?>
+          <?php } ?>
         </tbody>
     </table>
-    <nav>
-        <ul class="pagination justify-content-center">
+        
+        <nav>
+            <ul class="pagination justify-content-center">
             <li class="page-item">
-            <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
+                <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
             </li>
             <?php 
             for($x= 1; $x <= $total_halaman; $x++){
-            ?> 
-            <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
-            <?php
+                ?> 
+                <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+                <?php
             }
             ?>				
             <li class="page-item">
-            <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
+                <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
             </li>
-        </ul>
-    </nav>
+            </ul>
+        </nav>
+        </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>

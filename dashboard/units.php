@@ -95,28 +95,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <td><?php echo $no++ ?></td>
                     <td><?php echo htmlentities($data['unit']); ?></td>
                     <td>
-                        <a href="edit_unit.php?id=<?php echo $data['id'] ?>" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?php echo $data['id']; ?>">Edit</a>
                         <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $data['id']; ?>">
                           Hapus
                         </a>
 
-                        <!-- Modal -->
+                        <!-- Modal Hapus -->
                         <form action="proses.php" method="post">
-                            <?php
-                                unset($_SESSION['idunit']);
-                                $_SESSION['idunit'] = $data['id'];
-                            ?>
                           <div class="modal fade text-dark" id="deleteModal<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header bg-primary">
                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Apakah Anda Yakin Ingin Menghapus Data Ini ?</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body text-center bg-dark">
+                                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
                                   <p>Unit : <?php echo htmlentities($data['unit']); ?></p>
                                 </div>
-                                <div class="modal-footer">
+                                <div class="modal-footer bg-dark">
                                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
                                   <button type="submit" class="btn btn-danger" name="hapus_unit">Hapus</button>
                                 </div>
@@ -124,6 +121,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                           </div>
                         </form>
+                        <!-- Akhir Modal Hapus -->
+
+                        <!-- Modal Edit -->
+                        <form action="proses.php" method="post">
+                          <div class="modal fade text-dark" id="edit<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Unit</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-left bg-dark">
+                                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                  <label for="unit">Unit</label>
+                                  <input type="text" class="form-control" name="unit" value="<?php echo $data['unit']; ?>">
+                                </div>
+                                <div class="modal-footer bg-dark">
+                                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                                  <button type="submit" class="btn btn-warning" name="edit_unit_obat">Edit</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                        <!-- Akhir Modal Edit -->
                     </td>
                 </tr>
                 <?php } ?>

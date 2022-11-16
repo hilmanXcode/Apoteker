@@ -13,31 +13,30 @@ if(isset($_POST['submit_jenis_obat'])){
     $kategori = $_POST['cat'];
     $deskripsi = $_POST['desc'];
     $efekSamping = $_POST['efek'];
+    $query = mysqli_query($koneksi, "INSERT INTO `category` (`kategori`, `deskripsi`, `efekSamping`) VALUES ('$kategori', '$deskripsi', '$efekSamping')");
 
-    if(!preg_match("/^[a-zA-Z-']*$/",$kategori) || $kategori == "" || $deskripsi == "" || $efekSamping = ""){
-        $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kolom Wajib Di Isi!',icon: 'error',confirmButtonText: 'OK'})</script>";
-        header("Location: tambah_kategori_obat.php");
-    }
-    else{
-        $query = mysqli_query($koneksi, "INSERT INTO `category` (`kategori`, `deskripsi`, `efekSamping`) VALUES ('$kategori', '$deskripsi', '$efekSamping')");
+    // if(!preg_match("/^[a-zA-Z-']*$/",$kategori) || $kategori == "" || $deskripsi == "" || $efekSamping = ""){
+    //     $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kolom Wajib Di Isi!',icon: 'error',confirmButtonText: 'OK'})</script>";
+    //     header("Location: tambah_kategori_obat.php");
+    // }
+    if($query){
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Data Berhasil Di Tambahkan!',icon: 'success',confirmButtonText: 'OK'})</script>";
-        header("Location: index.php");
+        header("Location: kategori.php");
     }
 }
 elseif(isset($_POST['edit_jenis_obat'])){
+    $id = $_POST['id'];
     $kategori = $_POST['cat'];
     $deskripsi = $_POST['desc'];
     $efekSamping = $_POST['efek'];
-    $id = $_SESSION['idcat'];
     $query = mysqli_query($koneksi, "UPDATE `category` SET kategori='$kategori', deskripsi='$deskripsi', efekSamping='$efekSamping' WHERE id='$id'") or die(mysqli_error($koneksi));
     if($query){
-        unset($_SESSION['idcat']);
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Data Berhasil Di Edit!',icon: 'success',confirmButtonText: 'OK'})</script>";
-        header("Location: index.php");
+        header("Location: kategori.php");
     }
 }
 elseif(isset($_POST['hapus_category'])){
-    $id = $_SESSION['idcat'];
+    $id = $_POST['id'];
 
     $query = mysqli_query($koneksi, "DELETE FROM category WHERE id='$id'") or die(mysqli_error($koneksi));
 
@@ -57,21 +56,20 @@ elseif(isset($_POST['submit_unit_obat'])){
     }
 }
 elseif(isset($_POST['edit_unit_obat'])){
-    $id = $_SESSION['idunit'];
+    $id = $_POST['id'];
     $unit = $_POST['unit'];
 
     $query = mysqli_query($koneksi, "UPDATE `units` SET unit='$unit' WHERE id='$id'") or die(mysqli_error($koneksi));
     if($query){
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Data Berhasil Di Ubah!',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: units.php");
-        unset($_SESSION['idunit']);
     }
     else {
         echo "Gagal";
     }
 }
 elseif(isset($_POST['hapus_unit'])){
-    $id = $_SESSION['idunit'];
+    $id = $_POST['id'];
     
     $query = mysqli_query($koneksi, "DELETE FROM units WHERE id='$id'") or die(mysqli_error($koneksi));
 
@@ -85,6 +83,7 @@ elseif(isset($_POST['hapus_unit'])){
     }
 }
 elseif(isset($_POST['submit_new_user'])){
+    $nama = $_POST['npegawai'];
     $username = $_POST['username'];
     $password = md5($_POST['pass']);
     $level = $_POST['level'];
@@ -106,7 +105,7 @@ elseif(isset($_POST['submit_pemasok'])){
 
     if($query){
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Pemasok',icon: 'success',confirmButtonText: 'OK'})</script>";
-        header("Location: index.php");
+        header("Location: pemasok.php");
     }
     else {
         echo "Gagal";
@@ -154,6 +153,76 @@ elseif(isset($_POST['edit_obat'])){
         echo "Gagal";
     }
 
+}
+elseif(isset($_POST['hapus_obat'])){
+    $id = $_POST['id'];
+
+    $query = mysqli_query($koneksi, "DELETE FROM obat WHERE id='$id'");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Berhasil Menghapus Data',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: obat.php");
+    }
+    else{
+        echo "Gagal";
+    }
+}
+elseif(isset($_POST['edit_pemasok'])){
+    $id = $_POST['id'];
+    $nama = $_POST['pemasok'];
+
+    $query = mysqli_query($koneksi, "UPDATE pemasok SET nama='$nama' WHERE id='$id'");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Mengubah Data Pemasok',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: pemasok.php");
+    }
+    else {
+        echo "Gagal";
+    }
+
+}
+elseif(isset($_POST['hapus_pemasok'])){
+    $id = $_POST['id'];
+
+    $query = mysqli_query($koneksi, "DELETE FROM pemasok WHERE id='$id'");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menghapus Data',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: pemasok.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
+elseif(isset($_POST['edit_pegawai'])){
+    $id = $_POST['id'];
+    $namapegawai = $_POST['nama'];
+    $username = $_POST['username'];
+    $level = $_POST['level'];
+
+    $query = mysqli_query($koneksi, "UPDATE users SET nama_pegawai='$namapegawai', username='$username', level='$level' WHERE id='$id'");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Mengubah Data',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: users.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
+elseif(isset($_POST['hapus_pegawai'])){
+    $id = $_POST['id'];
+
+    $query = mysqli_query($koneksi, "DELETE FROM users WHERE id='$id'");
+
+    if($query){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menghapus Data',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: users.php");
+    }
+    else {
+        echo "Gagal";
+    }
 }
 else {
     echo "What Are You Doing Here Sir ?";
