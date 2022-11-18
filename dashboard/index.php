@@ -163,6 +163,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
             </div>
           </div>
+		  <div class="col-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Penjualan</h5>
+                <p class="card-text">Terdapat <?php
+                  $query = mysqli_query($koneksi, "SELECT * FROM penjualan");
+                  $num = mysqli_num_rows($query);
+
+                  echo $num;
+                ?> Data Penjualan</p>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

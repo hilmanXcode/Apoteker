@@ -224,6 +224,28 @@ elseif(isset($_POST['hapus_pegawai'])){
         echo "Gagal";
     }
 }
+elseif(isset($_POST['submit_penjualan'])){
+    $namapembeli = $_POST['namapembeli'];
+    $obat = $_POST['namaobat'];
+    $stock = $_POST['stock'];
+    $unit = $_POST['unit'];
+    $harga = $_POST['hargasatuan'];
+    $banyakydbeli = $_POST['banyak'];
+    $total = $_POST['total'];
+    $newStock = $stock - $banyakydbeli;
+
+    $query = "INSERT INTO penjualan (nama, obat, unit, harga, beli, total) VALUES ('$namapembeli', '$obat', '$unit', $harga, $banyakydbeli, $total);
+    UPDATE obat SET Stock='$newStock' WHERE nama='$obat'";
+
+    if($koneksi->multi_query($query)){
+        $_SESSION['newstock'] = $newStock;
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Berhasil Menambah Data Penjualan',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: index.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
 else {
     echo "What Are You Doing Here Sir ?";
 }
