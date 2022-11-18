@@ -98,10 +98,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <td><?php echo htmlentities(ucwords($data['nama'])); ?></td>
                     <td><?php echo htmlentities(ucwords($data['obat'])); ?></td>
                     <td><?php echo htmlentities(ucwords($data['beli'])); ?></td>
-					<td><?php echo htmlentities(ucwords($data['harga'])); ?></td>
-					<td><?php echo htmlentities(ucwords($data['total'])); ?></td>
+                    <td><?php echo htmlentities(ucwords($data['harga'])); ?></td>
+                    <td><?php echo htmlentities(ucwords($data['total'])); ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?php echo $data['id']; ?>">Edit</a>
+                        <!-- <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editcodephphere">Edit</a> -->
                         <!-- Button trigger modal -->
                         <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $data['id']; ?>">
                           Hapus
@@ -118,13 +118,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                                 <div class="modal-body text-left bg-dark">
                                   <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                                  <p>Jenis Obat : <?php echo htmlentities(ucwords($data['kategori'])); ?></p>
-                                  <p>Deskripsi Obat : <?php echo htmlentities(ucwords($data['deskripsi'])); ?></p>
-                                  <p>Efek Samping Obat : <?php echo htmlentities(ucwords($data['efekSamping'])); ?></p>
+                                  <p>Nama Pembeli : <?php echo htmlentities(ucwords($data['nama'])); ?></p>
+                                  <p>Obat Yang Di Beli : <?php echo htmlentities(ucwords($data['obat'])); ?></p>
+                                  <p>Banyak Obat Yang Di Beli : <?php echo htmlentities(ucwords($data['beli'])); ?></p>
+                                  <p>Harga Satuan : <?php echo htmlentities(ucwords($data['harga'])); ?></p>
+                                  <p>Total : <?php echo htmlentities(ucwords($data['total'])); ?></p>
                                 </div>
                                 <div class="modal-footer bg-dark">
                                   <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
-                                  <button type="submit" class="btn btn-danger" name="hapus_category">Hapus</button>
+                                  <button type="submit" class="btn btn-danger" name="hapus_penjualan">Hapus</button>
                                 </div>
                               </div>
                             </div>
@@ -133,20 +135,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- End Modal Hapus -->
                         
                         <!-- Modal Edit -->
-                        <form action="proses.php" method="post">
-                          <div class="modal fade text-dark" id="edit<?php echo $data['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <!-- <form action="proses.php" method="post">
+                          <div class="modal fade text-dark" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header bg-primary">
-                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Kategori</h1>
+                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Penjualan</h1>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body bg-dark text-left">
-                                  <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                  <input type="hidden" name="id" value="">
                                   <label for="cat">Jenis Obat</label>
-                                  <input type="text" class="form-control" name="cat" value="<?php echo $data['kategori']; ?>">
+                                  <input type="text" class="form-control" name="cat" value="">
                                   <label for="desc">Deskripsi</label>
-                                  <input type="text" class="form-control" name="desc" value="<?php echo $data['deskripsi']; ?>">
+                                  <input type="text" class="form-control" name="desc" value="">
                                   <label for="efek">Efek Samping</label>
                                   <textarea style="height: 213px; resize: none;" name="efek" class="form-control" placeholder="Efek Samping" id="floatingTextarea" autocomplete="off"><?php echo $data['efekSamping']; ?></textarea>
                                 </div>
@@ -157,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </div>
                             </div>
                           </div>
-                        </form>
+                        </form> -->
                         <!-- Akhir Modal Edit -->
                     </td>
                 </tr>

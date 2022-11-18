@@ -238,9 +238,21 @@ elseif(isset($_POST['submit_penjualan'])){
     UPDATE obat SET Stock='$newStock' WHERE nama='$obat'";
 
     if($koneksi->multi_query($query)){
-        $_SESSION['newstock'] = $newStock;
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Berhasil Menambah Data Penjualan',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: index.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
+elseif(isset($_POST['hapus_penjualan'])){
+    $id = $_POST['id'];
+
+    $query = "DELETE FROM penjualan WHERE id='$id'";
+
+    if($koneksi->query($query)){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Berhasil Menghapus Data Penjualan',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: penjualan.php");
     }
     else {
         echo "Gagal";

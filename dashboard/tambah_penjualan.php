@@ -155,11 +155,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
       xmlhttp.send();
     }
     const hitungTotal = () => {
+      let stock = document.getElementById("stock").value;
       let harga_jual = document.getElementById("hargasatuan").value;
       let totalbeli = document.getElementById("banyak").value;
       let totalBelanja = harga_jual * totalbeli;
-      document.querySelector("#total").value = totalBelanja
-      console.log(totalBelanja)
+      if(totalbeli > stock){
+        Swal.fire({
+          title: 'Error!',
+          text: 'Stock tidak tersedia',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        })
+      }
+      else {
+        document.querySelector("#total").value = totalBelanja
+      }
     }
   </script>
 <!-- AdminLTE App -->
