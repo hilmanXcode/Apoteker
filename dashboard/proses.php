@@ -258,6 +258,24 @@ elseif(isset($_POST['hapus_penjualan'])){
         echo "Gagal";
     }
 }
+elseif(isset($_POST['submit_pembelian'])){
+    $pemasok = $_POST['pemasok'];
+    $t_transaksi = date('Y-m-d', strtotime($_POST['transaksi']));
+    $obat = $_POST['namaobat'];
+    $harga = $_POST['harga'];
+    $banyak_stock = $_POST['banyak'];
+    $total = $_POST['total'];
+
+    $query = "INSERT INTO pembelian (pemasok, t_transaksi, obat, harga, banyak_stock, total) VALUES ('$pemasok', '$t_transaksi', '$obat', $harga, $banyak_stock, $total)";
+
+    if($koneksi->query($query)){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Data Pembelian',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: index.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
 else {
     echo "What Are You Doing Here Sir ?";
 }

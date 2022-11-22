@@ -2,6 +2,7 @@
 include '../config/koneksi.php';
 error_reporting(0);
 $name = $_GET['q'];
+$pemasok = $_GET['p'];
 
 $query = mysqli_query($koneksi, "SELECT * FROM obat WHERE nama='$name'");
 $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
@@ -20,4 +21,5 @@ if($query){ ?>
 <?php }
 else {
     echo "Gagal";
-} ?>
+}
+?>
