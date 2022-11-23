@@ -157,17 +157,17 @@
                 </a>
                 <ul class='nav nav-treeview'>
                     <li class='nav-item'>
-                    <a href='#' class='nav-link'>
+                    <a href='tambah_pembelian.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Tambah Pembelian</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                     <li class='nav-item'>
-                    <a href='#' class='nav-link'>
+                    <a href='pembelian.php' class='nav-link'>
                         <i class='far fa-circle nav-icon'></i>
                         <p>Lihat Pembelian</p>
-                        <span class='right badge badge-warning'>Soon</span>
+                        <span class='right badge badge-danger'>New</span>
                     </a>
                     </li>
                 </ul>

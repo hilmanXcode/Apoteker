@@ -260,17 +260,34 @@ elseif(isset($_POST['hapus_penjualan'])){
 }
 elseif(isset($_POST['submit_pembelian'])){
     $pemasok = $_POST['pemasok'];
+    $stock = $_POST['stock'];
     $t_transaksi = date('Y-m-d', strtotime($_POST['transaksi']));
     $obat = $_POST['namaobat'];
     $harga = $_POST['harga'];
     $banyak_stock = $_POST['banyak'];
     $total = $_POST['total'];
+    $created = date('Y-m-d');
+    $newStock = $stock + $banyak_stock;
 
-    $query = "INSERT INTO pembelian (pemasok, t_transaksi, obat, harga, banyak_stock, total) VALUES ('$pemasok', '$t_transaksi', '$obat', $harga, $banyak_stock, $total)";
+    $query = "INSERT INTO pembelian (pemasok, t_transaksi, obat, harga, banyak_stock, total, created) VALUES ('$pemasok', '$t_transaksi', '$obat', $harga, $banyak_stock, $total, '$created');
+    UPDATE obat SET Stock='$newStock' WHERE nama='$obat' AND pemasok='$pemasok'";
 
-    if($koneksi->query($query)){
+    if($koneksi->multi_query($query)){
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Berhasil Menambahkan Data Pembelian',icon: 'success',confirmButtonText: 'OK'})</script>";
         header("Location: index.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
+elseif(isset($_POST['hapus_pembelian'])){
+    $id = $_POST['id'];
+
+    $query = "DELETE FROM pembelian WHERE id='$id'";
+
+    if($koneksi->query($query)){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Berhasil Menghapus Data Pembelian',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: pembelian.php");
     }
     else {
         echo "Gagal";
