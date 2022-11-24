@@ -4,7 +4,12 @@ include '../config/koneksi.php';
 
 $id = mysqli_real_escape_string($koneksi, $_GET['id']);
 
-if(!$id){
+if($_SESSION['level'] < 2){
+  $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+  header("Location: index.php");
+  die();
+}
+elseif(!$id){
     header("Location: obat.php");
 }
 

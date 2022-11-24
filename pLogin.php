@@ -14,15 +14,15 @@ $row = mysqli_fetch_array($query, MYSQLI_ASSOC);
 
 if($num != 0){
     if($row['level'] == 1337){
-        $_SESSION['level'] = $row['level'];
+        $_SESSION['level'] = intval($row['level']);
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai Owner!',icon: 'success',confirmButtonText: 'Close'})</script>";
     }
     elseif($row['level'] == 1){
-        $_SESSION['level'] = $row['level'];
+        $_SESSION['level'] = intval($row['level']);
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai Kasir!',icon: 'success',confirmButtonText: 'Close'})</script>";
     }
     elseif($row['level'] == 2){
-        $_SESSION['level'] = $row['level'];
+        $_SESSION['level'] = intval($row['level']);
         $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Telah Masuk Sebagai Manager!',icon: 'success',confirmButtonText: 'Close'})</script>";
     }
     $_SESSION['id'] = $row['id'];

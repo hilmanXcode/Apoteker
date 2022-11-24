@@ -1,6 +1,11 @@
 <?php
 include '../utilities/validate.php';
 
+if($_SESSION['level'] != 1337){
+  $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+  header("Location: index.php");
+  die();
+}
 ?>
 
 

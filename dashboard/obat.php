@@ -2,6 +2,26 @@
 include '../utilities/validate.php';
 include '../config/koneksi.php';
 
+
+// Autentikasi
+// $id = $_SESSION['id'];
+// $auth = mysqli_query($koneksi, "SELECT * FROM users WHERE id='$id'");
+// $data = mysqli_fetch_array($auth, MYSQLI_ASSOC);
+// if($auth) {
+//   if($data['level'] == 1){
+//     $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+//     header("Location: index.php");
+//     die();
+//   }
+// }
+
+if($_SESSION['level'] < 2){
+  $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+  header("Location: index.php");
+  die();
+}
+
+// End Autentikasi
 // Pagination
 $batas = 10;
 $halaman = isset($_GET['halaman'])? (int)$_GET['halaman'] : 1;
@@ -22,7 +42,6 @@ $units = mysqli_query($koneksi, "SELECT * FROM units");
 $supplier = mysqli_query($koneksi, "SELECT * FROM pemasok");
 $kategories = mysqli_query($koneksi, "SELECT * FROM category");
 // End Necessary
-
 ?>
 
 <!DOCTYPE html>

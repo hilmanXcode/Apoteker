@@ -4,6 +4,11 @@ include '../config/koneksi.php';
 
 $pemasok = mysqli_query($koneksi, "SELECT * FROM pemasok");
 
+if($_SESSION['level'] < 2){
+  $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+  header("Location: index.php");
+  die();
+}
 ?>
 
 

@@ -1,11 +1,17 @@
 <?php
-include '../utilities/validate.php';
+session_start();
+// include '../utilities/validate.php';
 include '../config/koneksi.php';
 
 $units = mysqli_query($koneksi, "SELECT * FROM units");
 $supplier = mysqli_query($koneksi, "SELECT * FROM pemasok");
 $kategories = mysqli_query($koneksi, "SELECT * FROM category");
 
+if($_SESSION['level'] < 2){
+  $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+  header("Location: index.php");
+  die();
+}
 ?>
 
 

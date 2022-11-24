@@ -3,6 +3,12 @@ include '../config/koneksi.php';
 error_reporting(0);
 $pemasok = $_GET['p'];
 
+if($_SESSION['level'] < 2){
+    $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+    header("Location: index.php");
+    die();
+}
+
 $query = mysqli_query($koneksi, "SELECT nama FROM obat WHERE pemasok='$pemasok'");
 
 if($query){ ?>
