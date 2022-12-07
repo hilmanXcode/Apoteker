@@ -391,6 +391,23 @@ elseif(isset($_POST['hapus_pembelian'])){
         echo "Gagal";
     }
 }
+elseif(isset($_POST['hapus_obat_kadaluarsa'])){
+    $id = $_POST['id'];
+    if($_SESSION['level'] < 2){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Error!',text: 'Kamu Tidak Punya Akses!',icon: 'error',confirmButtonText: 'OK'})</script>";
+        header("Location: index.php");
+        die();
+    }
+    $query = "DELETE FROM obat WHERE id='$id'";
+
+    if($koneksi->query($query)){
+        $_SESSION['message'] = "<script>Swal.fire({title: 'Berhasil!',text: 'Kamu Berhasil Menghapus Data Obat Kadaluarsa',icon: 'success',confirmButtonText: 'OK'})</script>";
+        header("Location: obat_kadaluarsa.php");
+    }
+    else {
+        echo "Gagal";
+    }
+}
 else {
     echo "What Are You Doing Here Sir ?";
 }

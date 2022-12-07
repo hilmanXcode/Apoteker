@@ -42,6 +42,7 @@ $units = mysqli_query($koneksi, "SELECT * FROM units");
 $supplier = mysqli_query($koneksi, "SELECT * FROM pemasok");
 $kategories = mysqli_query($koneksi, "SELECT * FROM category");
 // End Necessary
+$num = mysqli_num_rows($datas);
 ?>
 
 <!DOCTYPE html>
@@ -104,6 +105,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <div class="">
+        <?php
+          if($num > 1){
+        ?>
         <table class="table text-center" border="1">
             <thead>
                 <tr class="bg-primary">
@@ -235,21 +239,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <?php } ?>
             </tbody>
         </table>
+        <?php }
+        else {
+          echo "<h3 class='text-center'>Data Tidak Ditemukan</h3>";
+        }
+        ?>
       <nav>
         <ul class="pagination justify-content-center">
+          <?php 
+            if($halaman != 1) {
+          ?>
           <li class="page-item">
             <a class="page-link" <?php if($halaman > 1){ echo "href='?halaman=$previous'"; } ?>>Previous</a>
           </li>
+          <?php } else {
+
+          } ?>
           <?php 
           for($x= 1; $x <= $total_halaman; $x++){
-            ?> 
+            if($x != 1) {
+            ?>
             <li class="page-item"><a class="page-link" href="?halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
             <?php
+            } else {
+              
+            }
           }
-          ?>				
+          ?>
+          <?php
+            if($halaman != 1) {
+          ?>
           <li class="page-item">
             <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?halaman=$next'"; } ?>>Next</a>
           </li>
+          <?php } else {
+
+          } ?>
+
         </ul>
       </nav>
         </div>

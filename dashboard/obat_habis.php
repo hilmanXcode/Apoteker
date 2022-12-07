@@ -21,6 +21,7 @@ $jumlah_data = mysqli_num_rows($data);
 $total_halaman = ceil($jumlah_data / $batas);
 $datas = mysqli_query($koneksi, "SELECT * FROM obat WHERE Stock < 1 LIMIT $halaman_awal, $batas") or die(mysqli_error($koneksi));
 $no = $halaman_awal + 1;
+$num = mysqli_num_rows($datas);
 
 ?>
 
@@ -84,6 +85,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <div class="">
+          <?php 
+            if($num == 0){
+              echo "<h3 class='text-center'>Data Tidak Ditemukan</h3>";
+            }
+            else {
+          ?>
         <table class="table text-center" border="1">
             <thead>
                 <tr class="bg-primary">
@@ -112,13 +119,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <td><?php echo htmlentities($data['h_jual']); ?></td>
                     <td><?php echo htmlentities($data['Unit']); ?></td>
                     <td>
-                        <a href="#" class="btn btn-warning">Edit</a>
-                        <a href="#" class="btn btn-danger">Hapus</a>
+                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?php echo $dataobat['id']; ?>">Hapus</a>
                     </td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
+        
       <nav>
         <ul class="pagination justify-content-center">
           <li class="page-item">
@@ -136,6 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
         </ul>
       </nav>
+      <?php } ?>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
