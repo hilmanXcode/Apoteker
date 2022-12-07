@@ -126,7 +126,7 @@ document.onkeydown = function(e) {
 
 
 <!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script> 
 <!-- Bootstrap 4 -->
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

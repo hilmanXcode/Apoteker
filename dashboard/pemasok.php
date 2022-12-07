@@ -45,7 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" href="dist/img/brand-logo.png" type="image/gif" sizes="16x16">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="hold-transition sidebar-mini" oncontextmenu="return false;">
+<body class="hold-transition sidebar-mini" oncontextmenu="return false;"> 
 <div class="wrapper">
 
 
